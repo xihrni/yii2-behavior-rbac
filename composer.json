@@ -6,8 +6,8 @@
   "license": "BSD-3-Clause",
   "require": {
     "yiisoft/yii2": "*",
-    "xihrni/php-tools": "*",
-    "xihrni/yii2-behavior-time": "*"
+    "xihrni/php-tools": ">=0.0.4",
+    "xihrni/yii2-behavior-time": ">=0.0.2"
   },
   "authors": [
     {
