@@ -1,0 +1,23 @@
+{
+  "name": "xihrni/yii2-behavior-rbac",
+  "description": "Used for rbac-based authentication of permissions.",
+  "keywords": ["yii2", "behavior", "rbac", "role", "permission", "authentication"],
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "require": {
+    "yiisoft/yii2": "*",
+    "xihrni/php-tools": "*",
+    "xihrni/yii2-behavior-time": "*"
+  },
+  "authors": [
+    {
+      "name": "xihrni",
+      "email": "xihrni@126.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "xihrni\\yii2\\behaviors\\": "src/"
+    }
+  }
+}
