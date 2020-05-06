@@ -9,6 +9,12 @@ $ composer require xihrni/yii2-behavior-rbac
 ```
 
 ## Usage
+### Database
+使用 Yii2 的迁移来生成数据库中的相关表
+```php
+yii migrate --migrationPath=@vendor/xihrni/yii2-behavior-rbac/migrations
+```
+
 ### Controller
 ```php
 <?php
