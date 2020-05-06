@@ -22,6 +22,8 @@ class m200501_080000_create_rbac extends Migration
         $this->_createAdminAuthPermissionTable();
         // 创建管理员角色分配表
         $this->_createAdminAuthAssignTable();
+        // 创建示例数据
+        $this->_createExampleData();
     }
 
     /**
@@ -197,5 +199,77 @@ class m200501_080000_create_rbac extends Migration
         // 添加外键
         $this->addForeignKey($name . '_fk_admin_id', $table, 'admin_id', '{{%admin}}', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey($name . '_fk_role_id', $table, 'role_id', '{{%admin_auth_role}}', 'id', 'CASCADE', 'CASCADE');
+    }
+
+    /**
+     * 创建示例数据
+     *
+     * @private
+     * @return void
+     */
+    private function _createExampleData()
+    {
+        // 管理员表
+        $this->insert('{{%admin}}', [
+            'id' => 1,
+            'username' => 'admin',
+            'password_hash' => '$2y$13$hoQ5IhO27yfACw1n19bY0.6ulZWJ6avPqyPU2UvfhojEtIbBSHAL.',
+            'realname' => '张三',
+        ]);
+
+        // 管理员后台菜单表
+        $this->insert('{{%admin_auth_menu}}', [
+            'id' => 1,
+            'parent_id' => null,
+            'name' => '首页',
+        ]);
+        $this->insert('{{%admin_auth_menu}}', [
+            'id' => 2,
+            'parent_id' => 1,
+            'name' => '首页',
+        ]);
+        $this->insert('{{%admin_auth_menu}}', [
+            'id' => 3,
+            'parent_id' => 1,
+            'name' => '仪表盘',
+        ]);
+
+        // 管理员权限表
+        $this->insert('{{%admin_auth_permission}}', [
+            'id' => 1,
+            'menu_id' => 2,
+            'title' => '个人信息',
+            'modules' => 'v1/admin/index',
+            'controller' => 'index',
+            'action' => 'person',
+            'name' => '/v1/admin/index/index/person',
+            'method' => 'GET',
+            'condition' => '',
+        ]);
+        $this->insert('{{%admin_auth_permission}}', [
+            'id' => 2,
+            'menu_id' => 2,
+            'title' => '更改密码',
+            'modules' => 'v1/admin/index',
+            'controller' => 'index',
+            'action' => 'password',
+            'name' => '/v1/admin/index/index/password',
+            'method' => 'PATCH',
+            'condition' => '',
+        ]);
+
+        // 管理员角色表
+        $this->insert('{{%admin_auth_role}}', [
+            'id' => 1,
+            'name' => '管理员',
+            'permissions' => json_encode([1]),
+            'description' => '网站管理员',
+        ]);
+
+        // 管理员角色分配表
+        $this->insert('{{%admin_auth_assign}}', [
+            'admin_id' => 1,
+            'role_id' => 1,
+        ]);
     }
 }
